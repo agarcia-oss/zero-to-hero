@@ -1,15 +1,15 @@
 dependencies:
 - name: logstash
-  repository: https://helm.elastic.co
-  version: 8.5.1
-- name: nginx-ingress
-  repository: oci://ghcr.io/nginxinc/charts
-  version: 1.1.3
+  repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
+  version: 5.11.5
+- name: nginx
+  repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
+  version: 15.12.4
 - name: grafana
-  repository: https://grafana.github.io/helm-charts
-  version: 7.3.3
-- name: prometheus
-  repository: https://prometheus-community.github.io/helm-charts
-  version: 25.16.0
-digest: sha256:31d630d2885efec7a77942b790aae540f470b40d6b9a7431c169e50580334cfa
-generated: "2024-03-06T20:11:28.718304+01:00"
+  repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
+  version: 9.11.1
+- name: minio
+  repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
+  version: 13.8.1
+digest: sha256:576dd18638ccf5b5e61624ab3031759c919941317de7cee07676acc22848653f
+generated: "2024-03-06T20:39:54.361742+01:00"
