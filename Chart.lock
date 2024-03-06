@@ -1,5 +1,5 @@
 dependencies:
-- name: elasticsearch
+- name: logstash
   repository: https://helm.elastic.co
   version: 8.5.1
 - name: nginx-ingress
@@ -11,5 +11,5 @@ dependencies:
 - name: prometheus
   repository: https://prometheus-community.github.io/helm-charts
   version: 25.16.0
-digest: sha256:958acf04e20839ec2c27b67071b2e1f90c84f78a97adfe0c08d9f87514298c6c
-generated: "2024-03-06T19:36:23.285497+01:00"
+digest: sha256:31d630d2885efec7a77942b790aae540f470b40d6b9a7431c169e50580334cfa
+generated: "2024-03-06T20:11:28.718304+01:00"
