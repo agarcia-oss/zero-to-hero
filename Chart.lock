@@ -8,8 +8,8 @@ dependencies:
 - name: grafana
   repository: oci://registry-1.docker.io/bitnamicharts
   version: 9.12.0
-- name: prometheus
+- name: minio
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 0.12.0
-digest: sha256:7ffa890bd1e1e8e19eb7115590262f3e86ee27935cb5eebe3144814172387410
-generated: "2024-03-06T20:21:13.244695+01:00"
+  version: 13.8.0
+digest: sha256:c56475eaa4018563f2b95d09572e43e3402b38420c791f59f452508bffb7b8be
+generated: "2024-03-06T20:56:10.817901+01:00"

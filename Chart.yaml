@@ -38,8 +38,8 @@ dependencies:
     repository: oci://registry-1.docker.io/bitnamicharts
     tags:
       - grafana
-  - name: prometheus
-    version: 0.12.0
+  - name: minio
+    version: 13.8.0
     repository: oci://registry-1.docker.io/bitnamicharts
     tags:
       - prometheus
