@@ -23,11 +23,11 @@ version: 0.1.0
 # It is recommended to use it with quotes.
 appVersion: "0.1.0"
 dependencies:
-  - name: logstash
-    version: 7.17.3
-    repository: https://helm.elastic.co
+  - name: clickhouse
+    version: 1.0.1
+    repository: https://liwenhe1993.github.io/charts
     tags:
-      - logstash
+      - clickhouse
   - name: nginx
     version: 0.1.0
     repository: https://charts.mirantis.com
