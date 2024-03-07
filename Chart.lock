@@ -8,8 +8,8 @@ dependencies:
 - name: grafana
   repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
   version: 9.11.1
-- name: minio
+- name: postgresql
   repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
-  version: 13.8.1
-digest: sha256:576dd18638ccf5b5e61624ab3031759c919941317de7cee07676acc22848653f
-generated: "2024-03-06T20:39:54.361742+01:00"
+  version: 14.3.1
+digest: sha256:6790d00f3833a1e787af8bf76262806ae8799da8d7998fff87707e01c919550c
+generated: "2024-03-07T09:01:09.629904+01:00"
