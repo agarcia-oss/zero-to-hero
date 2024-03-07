@@ -1,15 +1,15 @@
 dependencies:
 - name: logstash
   repository: https://helm.elastic.co
-  version: 8.5.1
-- name: nginx-ingress
-  repository: oci://ghcr.io/nginxinc/charts
-  version: 1.1.3
+  version: 7.17.3
+- name: nginx
+  repository: https://charts.mirantis.com
+  version: 0.1.0
 - name: grafana
   repository: https://grafana.github.io/helm-charts
-  version: 7.3.3
-- name: prometheus
-  repository: https://prometheus-community.github.io/helm-charts
-  version: 25.16.0
-digest: sha256:31d630d2885efec7a77942b790aae540f470b40d6b9a7431c169e50580334cfa
-generated: "2024-03-06T20:11:28.718304+01:00"
+  version: 6.61.2
+- name: postgresql
+  repository: https://cetic.github.io/helm-charts
+  version: 0.2.4
+digest: sha256:795fbdf686dffabdb445a1eaf9acd2164b02fb72d57cbf1ab5beaf0bbcf5071c
+generated: "2024-03-07T07:42:02.175355+01:00"
