@@ -8,8 +8,8 @@ dependencies:
 - name: grafana
   repository: oci://registry-1.docker.io/bitnamicharts
   version: 9.12.0
-- name: minio
+- name: postgresql
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 13.8.0
-digest: sha256:c56475eaa4018563f2b95d09572e43e3402b38420c791f59f452508bffb7b8be
-generated: "2024-03-06T20:56:10.817901+01:00"
+  version: 14.3.0
+digest: sha256:6cc0893ffec0d020a2771521f25bc5df5d1b1e686bf827078275d8783967540a
+generated: "2024-03-07T07:55:03.108927+01:00"
