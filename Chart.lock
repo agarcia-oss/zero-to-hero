@@ -1,7 +1,7 @@
 dependencies:
-- name: logstash
+- name: clickhouse
   repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
-  version: 5.11.5
+  version: 5.3.1
 - name: nginx
   repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
   version: 15.12.4
@@ -11,5 +11,5 @@ dependencies:
 - name: postgresql
   repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
   version: 14.3.1
-digest: sha256:6790d00f3833a1e787af8bf76262806ae8799da8d7998fff87707e01c919550c
-generated: "2024-03-07T09:01:09.629904+01:00"
+digest: sha256:ee17fe8476fd1f9f5336dc9fe336aad9a7fdd8ed6c76a651e1b312e2355b3c6c
+generated: "2024-03-07T13:04:40.506121+01:00"
