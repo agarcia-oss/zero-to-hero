@@ -1,7 +1,7 @@
 dependencies:
-- name: logstash
+- name: clickhouse
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 5.12.0
+  version: 5.3.0
 - name: nginx
   repository: oci://registry-1.docker.io/bitnamicharts
   version: 15.14.0
@@ -11,5 +11,5 @@ dependencies:
 - name: postgresql
   repository: oci://registry-1.docker.io/bitnamicharts
   version: 14.3.0
-digest: sha256:6cc0893ffec0d020a2771521f25bc5df5d1b1e686bf827078275d8783967540a
-generated: "2024-03-07T07:55:03.108927+01:00"
+digest: sha256:b109f4fb83cf21d98d4653fa823fb7886775b4f30b57081ccd4a92a1cf4d7249
+generated: "2024-03-07T15:31:43.163814+01:00"

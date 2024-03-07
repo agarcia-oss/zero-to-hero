@@ -23,11 +23,11 @@ version: 0.1.0
 # It is recommended to use it with quotes.
 appVersion: "0.1.0"
 dependencies:
-  - name: logstash
-    version: 5.12.0
+  - name: clickhouse
+    version: 5.3.0
     repository: oci://registry-1.docker.io/bitnamicharts
     tags:
-      - logstash
+      - clickhouse
   - name: nginx
     version: 15.14.0
     repository: oci://registry-1.docker.io/bitnamicharts
