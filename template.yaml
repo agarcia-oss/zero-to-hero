@@ -1,0 +1,1928 @@
+---
+# Source: zero-to-hero/charts/clickhouse/charts/zookeeper/templates/networkpolicy.yaml
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: zero-zookeeper
+  namespace: default
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: zookeeper
+    app.kubernetes.io/version: 3.9.1
+    helm.sh/chart: zookeeper-12.11.1
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: zero
+      app.kubernetes.io/name: zookeeper
+  policyTypes:
+    - Ingress
+    - Egress
+  egress:
+    - {}
+  ingress:
+    # Allow inbound connections to ZooKeeper
+    - ports:
+        - port: 2181
+    # Allow internal communications between nodes
+    - ports:
+        - port: 2888
+        - port: 3888
+      from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/instance: zero
+              app.kubernetes.io/name: zookeeper
+---
+# Source: zero-to-hero/charts/clickhouse/templates/networkpolicy.yaml
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: zero-clickhouse
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: clickhouse
+    app.kubernetes.io/version: 24.2.1
+    helm.sh/chart: clickhouse-5.3.0
+    app.kubernetes.io/component: clickhouse
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: zero
+      app.kubernetes.io/name: clickhouse
+      app.kubernetes.io/component: clickhouse
+  policyTypes:
+    - Ingress
+    - Egress
+  egress:
+    - {}
+  ingress:
+    - ports:
+        - port: 8123
+        - port: 9000
+        - port: 9004
+        - port: 9005
+        - port: 9009
+---
+# Source: zero-to-hero/charts/grafana/templates/networkpolicy.yaml
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: zero-grafana
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/version: 10.3.3
+    helm.sh/chart: grafana-9.13.0
+    app.kubernetes.io/component: grafana
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: zero
+      app.kubernetes.io/name: grafana
+      app.kubernetes.io/component: grafana
+  policyTypes:
+    - Ingress
+    - Egress
+  egress:
+    - {}
+  ingress:
+    - ports:
+        - port: 3000
+---
+# Source: zero-to-hero/charts/nginx/templates/networkpolicy.yaml
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: zero-nginx
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/version: 1.25.4
+    helm.sh/chart: nginx-15.14.0
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: zero
+      app.kubernetes.io/name: nginx
+  policyTypes:
+    - Ingress
+    - Egress
+  egress:
+    - {}
+  ingress:
+    - ports:
+        - port: 8080
+---
+# Source: zero-to-hero/charts/postgresql/templates/primary/networkpolicy.yaml
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: zero-postgresql
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/version: 16.2.0
+    helm.sh/chart: postgresql-14.3.0
+    app.kubernetes.io/component: primary
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: zero
+      app.kubernetes.io/name: postgresql
+      app.kubernetes.io/component: primary
+  policyTypes:
+    - Ingress
+    - Egress
+  egress:
+    - {}
+  ingress:
+    - ports:
+        - port: 5432
+---
+# Source: zero-to-hero/templates/networkpolicy.yaml
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: zero-zero-to-hero
+  labels:
+    helm.sh/chart: zero-to-hero-0.1.0
+    app.kubernetes.io/name: zero-to-hero
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/version: "0.1.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: zero-to-hero
+      app.kubernetes.io/instance: zero
+  policyTypes:
+    - Ingress
+    - Egress
+  egress:
+    - ports:
+        # Allow dns resolution
+        - port: 53
+          protocol: UDP
+        - port: 53
+          protocol: TCP
+  ingress:
+    - ports:
+        - port: 80
+      from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/instance: zero
+              app.kubernetes.io/name: zero-to-hero
+        - podSelector:
+            matchLabels:
+              zero-zero-to-hero-client: "true"
+---
+# Source: zero-to-hero/charts/clickhouse/charts/zookeeper/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: zero-zookeeper
+  namespace: default
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: zookeeper
+    app.kubernetes.io/version: 3.9.1
+    helm.sh/chart: zookeeper-12.11.1
+    app.kubernetes.io/component: zookeeper
+    role: zookeeper
+automountServiceAccountToken: false
+---
+# Source: zero-to-hero/charts/clickhouse/templates/service-account.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: zero-clickhouse
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: clickhouse
+    app.kubernetes.io/version: 24.2.1
+    helm.sh/chart: clickhouse-5.3.0
+    app.kubernetes.io/component: clickhouse
+automountServiceAccountToken: false
+---
+# Source: zero-to-hero/charts/grafana/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: zero-grafana
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/version: 10.3.3
+    helm.sh/chart: grafana-9.13.0
+secrets:
+  - name: zero-grafana-admin
+automountServiceAccountToken: false
+---
+# Source: zero-to-hero/charts/nginx/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: zero-nginx
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/version: 1.25.4
+    helm.sh/chart: nginx-15.14.0
+automountServiceAccountToken: false
+---
+# Source: zero-to-hero/charts/postgresql/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: zero-postgresql
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/version: 16.2.0
+    helm.sh/chart: postgresql-14.3.0
+automountServiceAccountToken: false
+---
+# Source: zero-to-hero/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: zero-zero-to-hero
+  labels:
+    helm.sh/chart: zero-to-hero-0.1.0
+    app.kubernetes.io/name: zero-to-hero
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/version: "0.1.0"
+    app.kubernetes.io/managed-by: Helm
+automountServiceAccountToken: true
+---
+# Source: zero-to-hero/charts/clickhouse/templates/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: zero-clickhouse
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: clickhouse
+    app.kubernetes.io/version: 24.2.1
+    helm.sh/chart: clickhouse-5.3.0
+    app.kubernetes.io/component: clickhouse
+type: Opaque
+data:
+  admin-password: "SERiVmtJYTE0dw=="
+---
+# Source: zero-to-hero/charts/grafana/templates/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: zero-grafana-admin
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/version: 10.3.3
+    helm.sh/chart: grafana-9.13.0
+    app.kubernetes.io/component: grafana
+type: Opaque
+data:
+  GF_SECURITY_ADMIN_PASSWORD: "Vkc0dU5MUmNaVg=="
+---
+# Source: zero-to-hero/charts/postgresql/templates/secrets.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: zero-postgresql
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/version: 16.2.0
+    helm.sh/chart: postgresql-14.3.0
+type: Opaque
+data:
+  postgres-password: "dHJKdjQ5WWhIOA=="
+  # We don't auto-generate LDAP password when it's not provided as we do for other passwords
+---
+# Source: zero-to-hero/charts/clickhouse/charts/zookeeper/templates/scripts-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zero-zookeeper-scripts
+  namespace: default
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: zookeeper
+    app.kubernetes.io/version: 3.9.1
+    helm.sh/chart: zookeeper-12.11.1
+    app.kubernetes.io/component: zookeeper
+data:
+  init-certs.sh: |-
+    #!/bin/bash
+  setup.sh: |-
+    #!/bin/bash
+
+    # Execute entrypoint as usual after obtaining ZOO_SERVER_ID
+    # check ZOO_SERVER_ID in persistent volume via myid
+    # if not present, set based on POD hostname
+    if [[ -f "/bitnami/zookeeper/data/myid" ]]; then
+        export ZOO_SERVER_ID="$(cat /bitnami/zookeeper/data/myid)"
+    else
+        HOSTNAME="$(hostname -s)"
+        if [[ $HOSTNAME =~ (.*)-([0-9]+)$ ]]; then
+            ORD=${BASH_REMATCH[2]}
+            export ZOO_SERVER_ID="$((ORD + 1 ))"
+        else
+            echo "Failed to get index from hostname $HOSTNAME"
+            exit 1
+        fi
+    fi
+    exec /entrypoint.sh /run.sh
+---
+# Source: zero-to-hero/charts/clickhouse/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zero-clickhouse
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: clickhouse
+    app.kubernetes.io/version: 24.2.1
+    helm.sh/chart: clickhouse-5.3.0
+    app.kubernetes.io/component: clickhouse
+data:
+  00_default_overrides.xml: |
+    <clickhouse>
+      <!-- Macros -->
+      <macros>
+        <shard from_env="CLICKHOUSE_SHARD_ID"></shard>
+        <replica from_env="CLICKHOUSE_REPLICA_ID"></replica>
+        <layer>zero-clickhouse</layer>
+      </macros>
+      <!-- Log Level -->
+      <logger>
+        <level>information</level>
+      </logger>
+      <!-- Cluster configuration - Any update of the shards and replicas requires helm upgrade -->
+      <remote_servers>
+        <default>
+          <shard>
+              <replica>
+                  <host>zero-clickhouse-shard0-0.zero-clickhouse-headless.default.svc.cluster.local</host>
+                  <port>9000</port>
+                  <user from_env="CLICKHOUSE_ADMIN_USER"></user>
+                  <password from_env="CLICKHOUSE_ADMIN_PASSWORD"></password>
+              </replica>
+              <replica>
+                  <host>zero-clickhouse-shard0-1.zero-clickhouse-headless.default.svc.cluster.local</host>
+                  <port>9000</port>
+                  <user from_env="CLICKHOUSE_ADMIN_USER"></user>
+                  <password from_env="CLICKHOUSE_ADMIN_PASSWORD"></password>
+              </replica>
+              <replica>
+                  <host>zero-clickhouse-shard0-2.zero-clickhouse-headless.default.svc.cluster.local</host>
+                  <port>9000</port>
+                  <user from_env="CLICKHOUSE_ADMIN_USER"></user>
+                  <password from_env="CLICKHOUSE_ADMIN_PASSWORD"></password>
+              </replica>
+          </shard>
+          <shard>
+              <replica>
+                  <host>zero-clickhouse-shard1-0.zero-clickhouse-headless.default.svc.cluster.local</host>
+                  <port>9000</port>
+                  <user from_env="CLICKHOUSE_ADMIN_USER"></user>
+                  <password from_env="CLICKHOUSE_ADMIN_PASSWORD"></password>
+              </replica>
+              <replica>
+                  <host>zero-clickhouse-shard1-1.zero-clickhouse-headless.default.svc.cluster.local</host>
+                  <port>9000</port>
+                  <user from_env="CLICKHOUSE_ADMIN_USER"></user>
+                  <password from_env="CLICKHOUSE_ADMIN_PASSWORD"></password>
+              </replica>
+              <replica>
+                  <host>zero-clickhouse-shard1-2.zero-clickhouse-headless.default.svc.cluster.local</host>
+                  <port>9000</port>
+                  <user from_env="CLICKHOUSE_ADMIN_USER"></user>
+                  <password from_env="CLICKHOUSE_ADMIN_PASSWORD"></password>
+              </replica>
+          </shard>
+        </default>
+      </remote_servers>
+      <!-- Zookeeper configuration -->
+      <zookeeper>
+        
+        <node>
+          <host from_env="KEEPER_NODE_0"></host>
+          <port>2181</port>
+        </node>
+        <node>
+          <host from_env="KEEPER_NODE_1"></host>
+          <port>2181</port>
+        </node>
+        <node>
+          <host from_env="KEEPER_NODE_2"></host>
+          <port>2181</port>
+        </node>
+      </zookeeper>
+    </clickhouse>
+---
+# Source: zero-to-hero/charts/clickhouse/templates/scripts-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zero-clickhouse-scripts
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: clickhouse
+    app.kubernetes.io/version: 24.2.1
+    helm.sh/chart: clickhouse-5.3.0
+    app.kubernetes.io/component: clickhouse
+data:
+  setup.sh: |-
+    #!/bin/bash
+
+    # Execute entrypoint as usual after obtaining KEEPER_SERVER_ID
+    # check KEEPER_SERVER_ID in persistent volume via myid
+    # if not present, set based on POD hostname
+    if [[ -f "/bitnami/clickhouse/keeper/data/myid" ]]; then
+        export KEEPER_SERVER_ID="$(cat /bitnami/clickhouse/keeper/data/myid)"
+    else
+        HOSTNAME="$(hostname -s)"
+        if [[ $HOSTNAME =~ (.*)-([0-9]+)$ ]]; then
+            export KEEPER_SERVER_ID=${BASH_REMATCH[2]}
+        else
+            echo "Failed to get index from hostname $HOST"
+            exit 1
+        fi
+    fi
+    exec /opt/bitnami/scripts/clickhouse/entrypoint.sh /opt/bitnami/scripts/clickhouse/run.sh -- --listen_host=0.0.0.0
+---
+# Source: zero-to-hero/charts/grafana/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zero-grafana-envvars
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/version: 10.3.3
+    helm.sh/chart: grafana-9.13.0
+    app.kubernetes.io/component: grafana
+data:
+  GF_SECURITY_ADMIN_USER: "admin"
+  GF_INSTALL_PLUGINS: ""
+  GF_PATHS_PLUGINS: "/opt/bitnami/grafana/data/plugins"
+  GF_AUTH_LDAP_ENABLED: "false"
+  GF_AUTH_LDAP_CONFIG_FILE: "/opt/bitnami/grafana/conf/ldap.toml"
+  GF_AUTH_LDAP_ALLOW_SIGN_UP: "false"
+  GF_PATHS_PROVISIONING: "/opt/bitnami/grafana/conf/provisioning"
+  GF_PATHS_CONFIG: "/opt/bitnami/grafana/conf/grafana.ini"
+  GF_PATHS_DATA: "/opt/bitnami/grafana/data"
+  GF_PATHS_LOGS: "/opt/bitnami/grafana/logs"
+---
+# Source: zero-to-hero/charts/grafana/templates/pvc.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: zero-grafana
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/version: 10.3.3
+    helm.sh/chart: grafana-9.13.0
+    app.kubernetes.io/component: grafana
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "10Gi"
+---
+# Source: zero-to-hero/charts/clickhouse/charts/zookeeper/templates/svc-headless.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: zero-zookeeper-headless
+  namespace: default
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: zookeeper
+    app.kubernetes.io/version: 3.9.1
+    helm.sh/chart: zookeeper-12.11.1
+    app.kubernetes.io/component: zookeeper
+spec:
+  type: ClusterIP
+  clusterIP: None
+  publishNotReadyAddresses: true
+  ports:
+    - name: tcp-client
+      port: 2181
+      targetPort: client
+    - name: tcp-follower
+      port: 2888
+      targetPort: follower
+    - name: tcp-election
+      port: 3888
+      targetPort: election
+  selector:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/name: zookeeper
+    app.kubernetes.io/component: zookeeper
+---
+# Source: zero-to-hero/charts/clickhouse/charts/zookeeper/templates/svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: zero-zookeeper
+  namespace: default
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: zookeeper
+    app.kubernetes.io/version: 3.9.1
+    helm.sh/chart: zookeeper-12.11.1
+    app.kubernetes.io/component: zookeeper
+spec:
+  type: ClusterIP
+  sessionAffinity: None
+  ports:
+    - name: tcp-client
+      port: 2181
+      targetPort: client
+      nodePort: null
+    - name: tcp-follower
+      port: 2888
+      targetPort: follower
+    - name: tcp-election
+      port: 3888
+      targetPort: election
+  selector:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/name: zookeeper
+    app.kubernetes.io/component: zookeeper
+---
+# Source: zero-to-hero/charts/clickhouse/templates/service-headless.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: zero-clickhouse-headless
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: clickhouse
+    app.kubernetes.io/version: 24.2.1
+    helm.sh/chart: clickhouse-5.3.0
+    app.kubernetes.io/component: clickhouse
+spec:
+  type: ClusterIP
+  clusterIP: None
+  publishNotReadyAddresses: true
+  ports:
+    - name: http
+      targetPort: http
+      port: 8123
+      protocol: TCP
+    - name: tcp
+      targetPort: tcp
+      port: 9000
+      protocol: TCP
+    - name: tcp-mysql
+      targetPort: tcp-mysql
+      port: 9004
+      protocol: TCP
+    - name: tcp-postgresql
+      targetPort: tcp-postgresql
+      port: 9005
+      protocol: TCP
+    - name: http-intersrv
+      targetPort: http-intersrv
+      port: 9009
+      protocol: TCP
+  selector:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/name: clickhouse
+    app.kubernetes.io/component: clickhouse
+---
+# Source: zero-to-hero/charts/clickhouse/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: zero-clickhouse
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: clickhouse
+    app.kubernetes.io/version: 24.2.1
+    helm.sh/chart: clickhouse-5.3.0
+    app.kubernetes.io/component: clickhouse
+spec:
+  type: ClusterIP
+  sessionAffinity: None
+  ports:
+    - name: http
+      targetPort: http
+      port: 8123
+      protocol: TCP
+      nodePort: null
+    - name: tcp
+      targetPort: tcp
+      port: 9000
+      protocol: TCP
+      nodePort: null
+    - name: tcp-mysql
+      targetPort: tcp-mysql
+      port: 9004
+      protocol: TCP
+      nodePort: null
+    - name: tcp-postgresql
+      targetPort: tcp-postgresql
+      port: 9005
+      protocol: TCP
+      nodePort: null
+    - name: http-intersrv
+      targetPort: http-intersrv
+      port: 9009
+      protocol: TCP
+      nodePort: null
+  selector:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/name: clickhouse
+    app.kubernetes.io/component: clickhouse
+---
+# Source: zero-to-hero/charts/grafana/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: zero-grafana
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/version: 10.3.3
+    helm.sh/chart: grafana-9.13.0
+    app.kubernetes.io/component: grafana
+spec:
+  type: ClusterIP
+  sessionAffinity: None
+  ports:
+    - port: 3000
+      targetPort: dashboard
+      protocol: TCP
+      name: http
+      nodePort: null
+  selector:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/component: grafana
+---
+# Source: zero-to-hero/charts/nginx/templates/svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: zero-nginx
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/version: 1.25.4
+    helm.sh/chart: nginx-15.14.0
+  annotations:
+spec:
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: "Cluster"
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+  selector:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/name: nginx
+---
+# Source: zero-to-hero/charts/postgresql/templates/primary/svc-headless.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: zero-postgresql-hl
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/version: 16.2.0
+    helm.sh/chart: postgresql-14.3.0
+    app.kubernetes.io/component: primary
+  annotations:
+    # Use this annotation in addition to the actual publishNotReadyAddresses
+    # field below because the annotation will stop being respected soon but the
+    # field is broken in some versions of Kubernetes:
+    # https://github.com/kubernetes/kubernetes/issues/58662
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+spec:
+  type: ClusterIP
+  clusterIP: None
+  # We want all pods in the StatefulSet to have their addresses published for
+  # the sake of the other Postgresql pods even before they're ready, since they
+  # have to be able to talk to each other in order to become ready.
+  publishNotReadyAddresses: true
+  ports:
+    - name: tcp-postgresql
+      port: 5432
+      targetPort: tcp-postgresql
+  selector:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/component: primary
+---
+# Source: zero-to-hero/charts/postgresql/templates/primary/svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: zero-postgresql
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/version: 16.2.0
+    helm.sh/chart: postgresql-14.3.0
+    app.kubernetes.io/component: primary
+spec:
+  type: ClusterIP
+  sessionAffinity: None
+  ports:
+    - name: tcp-postgresql
+      port: 5432
+      targetPort: tcp-postgresql
+      nodePort: null
+  selector:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/component: primary
+---
+# Source: zero-to-hero/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: zero-zero-to-hero
+  labels:
+    helm.sh/chart: zero-to-hero-0.1.0
+    app.kubernetes.io/name: zero-to-hero
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/version: "0.1.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: zero-to-hero
+    app.kubernetes.io/instance: zero
+---
+# Source: zero-to-hero/charts/grafana/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zero-grafana
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/version: 10.3.3
+    helm.sh/chart: grafana-9.13.0
+    app.kubernetes.io/component: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: zero
+      app.kubernetes.io/name: grafana
+      app.kubernetes.io/component: grafana
+  strategy: 
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: zero
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: grafana
+        app.kubernetes.io/version: 10.3.3
+        helm.sh/chart: grafana-9.13.0
+        app.kubernetes.io/component: grafana
+      annotations:
+        checksum/secret: f3bfb0d551f26d65b30bad0531b3e988924efe4ef377e9e0ea63b51b9289d53a
+        checksum/config: 57bd04debe2c22978ed9df5ba289562448a07f63bd59d24eebac07b6cf4f8276
+        checksum/dashboard-provider: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
+    spec:
+      
+      automountServiceAccountToken: false
+      serviceAccountName: zero-grafana
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: zero
+                    app.kubernetes.io/name: grafana
+                    app.kubernetes.io/component: grafana
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+          
+      securityContext:
+        fsGroup: 1001
+        fsGroupChangePolicy: Always
+        supplementalGroups: []
+        sysctls: []
+      initContainers:
+      containers:
+        - name: grafana
+          image: docker.io/bitnami/grafana:10.3.3-debian-12-r5
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1001
+            seLinuxOptions: "true"
+            seccompProfile: "true"
+            unAsUser: 1000
+          envFrom:
+            - configMapRef:
+                name: zero-grafana-envvars
+          env:
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: zero-grafana-admin
+                  key: GF_SECURITY_ADMIN_PASSWORD
+          volumeMounts:
+            - name: empty-dir
+              mountPath: /tmp
+              subPath: tmp-dir
+            - name: empty-dir
+              mountPath: /opt/bitnami/grafana/conf
+              subPath: app-conf-dir
+            - name: empty-dir
+              mountPath: /opt/bitnami/grafana/tmp
+              subPath: app-tmp-dir
+            - name: data
+              mountPath: /opt/bitnami/grafana/data
+          ports:
+            - name: dashboard
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: dashboard
+              scheme: HTTP
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 6
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: dashboard
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 6
+      volumes:
+        - name: empty-dir
+          emptyDir: {}
+        - name: data
+          persistentVolumeClaim:
+            claimName: zero-grafana
+---
+# Source: zero-to-hero/charts/nginx/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zero-nginx
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/version: 1.25.4
+    helm.sh/chart: nginx-15.14.0
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  strategy:
+    rollingUpdate: {}
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: zero
+      app.kubernetes.io/name: nginx
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: zero
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: nginx
+        app.kubernetes.io/version: 1.25.4
+        helm.sh/chart: nginx-15.14.0
+      annotations:
+    spec:
+      
+      shareProcessNamespace: false
+      serviceAccountName: zero-nginx
+      automountServiceAccountToken: false
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: zero
+                    app.kubernetes.io/name: nginx
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+          
+      hostNetwork: false
+      hostIPC: false
+      securityContext:
+        fsGroup: 1001
+        fsGroupChangePolicy: Always
+        supplementalGroups: []
+        sysctls: []
+      initContainers:
+        - name: preserve-logs-symlinks
+          image: docker.io/bitnami/nginx:1.25.4-debian-12-r3
+          imagePullPolicy: "IfNotPresent"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1001
+            seLinuxOptions: "true"
+            seccompProfile: "true"
+            unAsUser: 1000
+          command:
+            - /bin/bash
+          args:
+            - -ec
+            - |
+              #!/bin/bash
+              . /opt/bitnami/scripts/libfs.sh
+              # We copy the logs folder because it has symlinks to stdout and stderr
+              if ! is_dir_empty /opt/bitnami/nginx/logs; then
+                cp -r /opt/bitnami/nginx/logs /emptydir/app-logs-dir
+              fi
+          volumeMounts:
+            - name: empty-dir
+              mountPath: /emptydir
+      containers:
+        - name: nginx
+          image: docker.io/bitnami/nginx:1.25.4-debian-12-r3
+          imagePullPolicy: "IfNotPresent"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1001
+            seLinuxOptions: "true"
+            seccompProfile: "true"
+            unAsUser: 1000
+          env:
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: NGINX_HTTP_PORT_NUMBER
+              value: "8080"
+          envFrom:
+          ports:
+            - name: http
+              containerPort: 8080
+          livenessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+            tcpSocket:
+              port: http
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 3
+            tcpSocket:
+              port: http
+          volumeMounts:
+            - name: empty-dir
+              mountPath: /tmp
+              subPath: tmp-dir
+            - name: empty-dir
+              mountPath: /opt/bitnami/nginx/conf
+              subPath: app-conf-dir
+            - name: empty-dir
+              mountPath: /opt/bitnami/nginx/logs
+              subPath: app-logs-dir
+            - name: empty-dir
+              mountPath: /opt/bitnami/nginx/tmp
+              subPath: app-tmp-dir
+      volumes:
+        - name: empty-dir
+          emptyDir: {}
+---
+# Source: zero-to-hero/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zero-zero-to-hero
+  labels:
+    helm.sh/chart: zero-to-hero-0.1.0
+    app.kubernetes.io/name: zero-to-hero
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/version: "0.1.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: zero-to-hero
+      app.kubernetes.io/instance: zero
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: zero-to-hero-0.1.0
+        app.kubernetes.io/name: zero-to-hero
+        app.kubernetes.io/instance: zero
+        app.kubernetes.io/version: "0.1.0"
+        app.kubernetes.io/managed-by: Helm
+    spec:
+      serviceAccountName: zero-zero-to-hero
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        runAsUser: 1000
+      containers:
+        - name: zero-to-hero
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsGroup: 1000
+            runAsNonRoot: true
+            seLinuxOptions: "true"
+            seccompProfile: "true"
+            unAsUser: 1000
+          image: ":0.1.0"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+---
+# Source: zero-to-hero/charts/clickhouse/charts/zookeeper/templates/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zero-zookeeper
+  namespace: default
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: zookeeper
+    app.kubernetes.io/version: 3.9.1
+    helm.sh/chart: zookeeper-12.11.1
+    app.kubernetes.io/component: zookeeper
+    role: zookeeper
+spec:
+  replicas: 3
+  podManagementPolicy: Parallel
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: zero
+      app.kubernetes.io/name: zookeeper
+      app.kubernetes.io/component: zookeeper
+  serviceName: zero-zookeeper-headless
+  updateStrategy:
+    rollingUpdate: {}
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+      labels:
+        app.kubernetes.io/instance: zero
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: zookeeper
+        app.kubernetes.io/version: 3.9.1
+        helm.sh/chart: zookeeper-12.11.1
+        app.kubernetes.io/component: zookeeper
+    spec:
+      enableServiceLinks: true
+      serviceAccountName: zero-zookeeper
+      
+      automountServiceAccountToken: false
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: zero
+                    app.kubernetes.io/name: zookeeper
+                    app.kubernetes.io/component: zookeeper
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+          
+      securityContext:
+        fsGroup: 1001
+        fsGroupChangePolicy: Always
+        supplementalGroups: []
+        sysctls: []
+      initContainers:
+      containers:
+        - name: zookeeper
+          image: docker.io/bitnami/zookeeper:3.8.3-debian-12-r15
+          imagePullPolicy: "IfNotPresent"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1001
+            seLinuxOptions: "true"
+            seccompProfile: "true"
+            unAsUser: 1000
+          command:
+            - /scripts/setup.sh
+          env:
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: ZOO_DATA_LOG_DIR
+              value: ""
+            - name: ZOO_PORT_NUMBER
+              value: "2181"
+            - name: ZOO_TICK_TIME
+              value: "2000"
+            - name: ZOO_INIT_LIMIT
+              value: "10"
+            - name: ZOO_SYNC_LIMIT
+              value: "5"
+            - name: ZOO_PRE_ALLOC_SIZE
+              value: "65536"
+            - name: ZOO_SNAPCOUNT
+              value: "100000"
+            - name: ZOO_MAX_CLIENT_CNXNS
+              value: "60"
+            - name: ZOO_4LW_COMMANDS_WHITELIST
+              value: "srvr, mntr, ruok"
+            - name: ZOO_LISTEN_ALLIPS_ENABLED
+              value: "no"
+            - name: ZOO_AUTOPURGE_INTERVAL
+              value: "1"
+            - name: ZOO_AUTOPURGE_RETAIN_COUNT
+              value: "10"
+            - name: ZOO_MAX_SESSION_TIMEOUT
+              value: "40000"
+            - name: ZOO_SERVERS
+              value: zero-zookeeper-0.zero-zookeeper-headless.default.svc.cluster.local:2888:3888::1 zero-zookeeper-1.zero-zookeeper-headless.default.svc.cluster.local:2888:3888::2 zero-zookeeper-2.zero-zookeeper-headless.default.svc.cluster.local:2888:3888::3 
+            - name: ZOO_ENABLE_AUTH
+              value: "no"
+            - name: ZOO_ENABLE_QUORUM_AUTH
+              value: "no"
+            - name: ZOO_HEAP_SIZE
+              value: "1024"
+            - name: ZOO_LOG_LEVEL
+              value: "ERROR"
+            - name: ALLOW_ANONYMOUS_LOGIN
+              value: "yes"
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.name
+          ports:
+            - name: client
+              containerPort: 2181
+            - name: follower
+              containerPort: 2888
+            - name: election
+              containerPort: 3888
+          livenessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+            exec:
+              command:
+                - /bin/bash
+                - -ec
+                - ZOO_HC_TIMEOUT=2 /opt/bitnami/scripts/zookeeper/healthcheck.sh
+          readinessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+            exec:
+              command:
+                - /bin/bash
+                - -ec
+                - ZOO_HC_TIMEOUT=2 /opt/bitnami/scripts/zookeeper/healthcheck.sh
+          volumeMounts:
+            - name: empty-dir
+              mountPath: /tmp
+              subPath: tmp-dir
+            - name: empty-dir
+              mountPath: /opt/bitnami/zookeeper/conf
+              subPath: app-conf-dir
+            - name: empty-dir
+              mountPath: /opt/bitnami/zookeeper/logs
+              subPath: app-logs-dir
+            - name: scripts
+              mountPath: /scripts/setup.sh
+              subPath: setup.sh
+            - name: data
+              mountPath: /bitnami/zookeeper
+      volumes:
+        - name: empty-dir
+          emptyDir: {}
+        - name: scripts
+          configMap:
+            name: zero-zookeeper-scripts
+            defaultMode: 493
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: "8Gi"
+---
+# Source: zero-to-hero/charts/clickhouse/templates/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zero-clickhouse-shard0
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: clickhouse
+    app.kubernetes.io/version: 24.2.1
+    helm.sh/chart: clickhouse-5.3.0
+    app.kubernetes.io/component: clickhouse
+spec:
+  replicas: 3
+  podManagementPolicy: "Parallel"
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: zero
+      app.kubernetes.io/name: clickhouse
+      app.kubernetes.io/component: clickhouse
+  serviceName: zero-clickhouse-headless
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        checksum/config: e664660a385030642fa3edb9c7c21c7302d00b7acc01c46cf5f6adb87ec00289
+        checksum/config-extra: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
+        checksum/config-users-extra: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
+      labels:
+        app.kubernetes.io/instance: zero
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: clickhouse
+        app.kubernetes.io/version: 24.2.1
+        helm.sh/chart: clickhouse-5.3.0
+        app.kubernetes.io/component: clickhouse
+        shard: "0"
+    spec:
+      serviceAccountName: zero-clickhouse
+      
+      automountServiceAccountToken: false
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: zero
+                    app.kubernetes.io/name: clickhouse
+                    app.kubernetes.io/component: clickhouse
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+          
+      securityContext:
+        fsGroup: 1001
+        fsGroupChangePolicy: Always
+        supplementalGroups: []
+        sysctls: []
+      initContainers:
+      containers:
+        - name: clickhouse
+          image: docker.io/bitnami/clickhouse:24.2.1-debian-12-r0
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1001
+            seLinuxOptions: "true"
+            seccompProfile: "true"
+            unAsUser: 1000
+          command:
+            - /scripts/setup.sh
+          env:
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: CLICKHOUSE_HTTP_PORT
+              value: "8123"
+            - name: CLICKHOUSE_TCP_PORT
+              value: "9000"
+            - name: CLICKHOUSE_MYSQL_PORT
+              value: "9004"
+            - name: CLICKHOUSE_POSTGRESQL_PORT
+              value: "9005"
+            - name: CLICKHOUSE_INTERSERVER_HTTP_PORT
+              value: "9009"
+            - name: CLICKHOUSE_ADMIN_USER
+              value: "default"
+            - name: CLICKHOUSE_SHARD_ID
+              value: "shard0"
+            - name: CLICKHOUSE_REPLICA_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: CLICKHOUSE_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: zero-clickhouse
+                  key: admin-password
+            - name: KEEPER_NODE_0
+              value: zero-zookeeper-0.zero-zookeeper-headless.default.svc.cluster.local
+            - name: KEEPER_NODE_1
+              value: zero-zookeeper-1.zero-zookeeper-headless.default.svc.cluster.local
+            - name: KEEPER_NODE_2
+              value: zero-zookeeper-2.zero-zookeeper-headless.default.svc.cluster.local
+          envFrom:
+          ports:
+            - name: http
+              containerPort: 8123
+            - name: tcp
+              containerPort: 9000
+            - name: tcp-postgresql
+              containerPort: 9005
+            - name: tcp-mysql
+              containerPort: 9004
+            - name: http-intersrv
+              containerPort: 9009
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+            httpGet:
+              path: /ping
+              port: http
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+            httpGet:
+              path: /ping
+              port: http
+          volumeMounts:
+            - name: empty-dir
+              mountPath: /opt/bitnami/clickhouse/etc
+              subPath: app-conf-dir
+            - name: empty-dir
+              mountPath: /opt/bitnami/clickhouse/logs
+              subPath: app-logs-dir
+            - name: empty-dir
+              mountPath: /opt/bitnami/clickhouse/tmp
+              subPath: app-tmp-dir
+            - name: empty-dir
+              mountPath: /tmp
+              subPath: tmp-dir
+            - name: scripts
+              mountPath: /scripts/setup.sh
+              subPath: setup.sh
+            - name: data
+              mountPath: /bitnami/clickhouse
+            - name: config
+              mountPath: /bitnami/clickhouse/etc/conf.d/default
+      volumes:
+        - name: scripts
+          configMap:
+            name: zero-clickhouse-scripts
+            defaultMode: 0755
+        - name: empty-dir
+          emptyDir: {}
+        - name: config
+          configMap:
+            name: zero-clickhouse
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        labels:
+          app.kubernetes.io/instance: zero
+          app.kubernetes.io/name: clickhouse
+          app.kubernetes.io/component: clickhouse
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: "8Gi"
+---
+# Source: zero-to-hero/charts/clickhouse/templates/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zero-clickhouse-shard1
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: clickhouse
+    app.kubernetes.io/version: 24.2.1
+    helm.sh/chart: clickhouse-5.3.0
+    app.kubernetes.io/component: clickhouse
+spec:
+  replicas: 3
+  podManagementPolicy: "Parallel"
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: zero
+      app.kubernetes.io/name: clickhouse
+      app.kubernetes.io/component: clickhouse
+  serviceName: zero-clickhouse-headless
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        checksum/config: e664660a385030642fa3edb9c7c21c7302d00b7acc01c46cf5f6adb87ec00289
+        checksum/config-extra: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
+        checksum/config-users-extra: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
+      labels:
+        app.kubernetes.io/instance: zero
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: clickhouse
+        app.kubernetes.io/version: 24.2.1
+        helm.sh/chart: clickhouse-5.3.0
+        app.kubernetes.io/component: clickhouse
+        shard: "1"
+    spec:
+      serviceAccountName: zero-clickhouse
+      
+      automountServiceAccountToken: false
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: zero
+                    app.kubernetes.io/name: clickhouse
+                    app.kubernetes.io/component: clickhouse
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+          
+      securityContext:
+        fsGroup: 1001
+        fsGroupChangePolicy: Always
+        supplementalGroups: []
+        sysctls: []
+      initContainers:
+      containers:
+        - name: clickhouse
+          image: docker.io/bitnami/clickhouse:24.2.1-debian-12-r0
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1001
+            seLinuxOptions: "true"
+            seccompProfile: "true"
+            unAsUser: 1000
+          command:
+            - /scripts/setup.sh
+          env:
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: CLICKHOUSE_HTTP_PORT
+              value: "8123"
+            - name: CLICKHOUSE_TCP_PORT
+              value: "9000"
+            - name: CLICKHOUSE_MYSQL_PORT
+              value: "9004"
+            - name: CLICKHOUSE_POSTGRESQL_PORT
+              value: "9005"
+            - name: CLICKHOUSE_INTERSERVER_HTTP_PORT
+              value: "9009"
+            - name: CLICKHOUSE_ADMIN_USER
+              value: "default"
+            - name: CLICKHOUSE_SHARD_ID
+              value: "shard1"
+            - name: CLICKHOUSE_REPLICA_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: CLICKHOUSE_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: zero-clickhouse
+                  key: admin-password
+            - name: KEEPER_NODE_0
+              value: zero-zookeeper-0.zero-zookeeper-headless.default.svc.cluster.local
+            - name: KEEPER_NODE_1
+              value: zero-zookeeper-1.zero-zookeeper-headless.default.svc.cluster.local
+            - name: KEEPER_NODE_2
+              value: zero-zookeeper-2.zero-zookeeper-headless.default.svc.cluster.local
+          envFrom:
+          ports:
+            - name: http
+              containerPort: 8123
+            - name: tcp
+              containerPort: 9000
+            - name: tcp-postgresql
+              containerPort: 9005
+            - name: tcp-mysql
+              containerPort: 9004
+            - name: http-intersrv
+              containerPort: 9009
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+            httpGet:
+              path: /ping
+              port: http
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+            httpGet:
+              path: /ping
+              port: http
+          volumeMounts:
+            - name: empty-dir
+              mountPath: /opt/bitnami/clickhouse/etc
+              subPath: app-conf-dir
+            - name: empty-dir
+              mountPath: /opt/bitnami/clickhouse/logs
+              subPath: app-logs-dir
+            - name: empty-dir
+              mountPath: /opt/bitnami/clickhouse/tmp
+              subPath: app-tmp-dir
+            - name: empty-dir
+              mountPath: /tmp
+              subPath: tmp-dir
+            - name: scripts
+              mountPath: /scripts/setup.sh
+              subPath: setup.sh
+            - name: data
+              mountPath: /bitnami/clickhouse
+            - name: config
+              mountPath: /bitnami/clickhouse/etc/conf.d/default
+      volumes:
+        - name: scripts
+          configMap:
+            name: zero-clickhouse-scripts
+            defaultMode: 0755
+        - name: empty-dir
+          emptyDir: {}
+        - name: config
+          configMap:
+            name: zero-clickhouse
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        labels:
+          app.kubernetes.io/instance: zero
+          app.kubernetes.io/name: clickhouse
+          app.kubernetes.io/component: clickhouse
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: "8Gi"
+---
+# Source: zero-to-hero/charts/postgresql/templates/primary/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zero-postgresql
+  namespace: "default"
+  labels:
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/version: 16.2.0
+    helm.sh/chart: postgresql-14.3.0
+    app.kubernetes.io/component: primary
+spec:
+  replicas: 1
+  serviceName: zero-postgresql-hl
+  updateStrategy:
+    rollingUpdate: {}
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: zero
+      app.kubernetes.io/name: postgresql
+      app.kubernetes.io/component: primary
+  template:
+    metadata:
+      name: zero-postgresql
+      labels:
+        app.kubernetes.io/instance: zero
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: postgresql
+        app.kubernetes.io/version: 16.2.0
+        helm.sh/chart: postgresql-14.3.0
+        app.kubernetes.io/component: primary
+    spec:
+      serviceAccountName: zero-postgresql
+      
+      automountServiceAccountToken: false
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: zero
+                    app.kubernetes.io/name: postgresql
+                    app.kubernetes.io/component: primary
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+          
+      securityContext:
+        fsGroup: 1001
+        fsGroupChangePolicy: Always
+        supplementalGroups: []
+        sysctls: []
+      hostNetwork: false
+      hostIPC: false
+      containers:
+        - name: postgresql
+          image: docker.io/bitnami/postgresql:16.2.0-debian-12-r5
+          imagePullPolicy: "IfNotPresent"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1001
+            seLinuxOptions: "true"
+            seccompProfile: "true"
+            unAsUser: 1000
+          env:
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: POSTGRESQL_PORT_NUMBER
+              value: "5432"
+            - name: POSTGRESQL_VOLUME_DIR
+              value: "/bitnami/postgresql"
+            - name: PGDATA
+              value: "/bitnami/postgresql/data"
+            # Authentication
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: zero-postgresql
+                  key: postgres-password
+            # Replication
+            # Initdb
+            # Standby
+            # LDAP
+            - name: POSTGRESQL_ENABLE_LDAP
+              value: "no"
+            # TLS
+            - name: POSTGRESQL_ENABLE_TLS
+              value: "no"
+            # Audit
+            - name: POSTGRESQL_LOG_HOSTNAME
+              value: "false"
+            - name: POSTGRESQL_LOG_CONNECTIONS
+              value: "false"
+            - name: POSTGRESQL_LOG_DISCONNECTIONS
+              value: "false"
+            - name: POSTGRESQL_PGAUDIT_LOG_CATALOG
+              value: "off"
+            # Others
+            - name: POSTGRESQL_CLIENT_MIN_MESSAGES
+              value: "error"
+            - name: POSTGRESQL_SHARED_PRELOAD_LIBRARIES
+              value: "pgaudit"
+          ports:
+            - name: tcp-postgresql
+              containerPort: 5432
+          livenessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - exec pg_isready -U "postgres" -h 127.0.0.1 -p 5432
+          readinessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - -e
+                - |
+                  exec pg_isready -U "postgres" -h 127.0.0.1 -p 5432
+                  [ -f /opt/bitnami/postgresql/tmp/.initialized ] || [ -f /bitnami/postgresql/.initialized ]
+          volumeMounts:
+            - name: empty-dir
+              mountPath: /tmp
+              subPath: tmp-dir
+            - name: empty-dir
+              mountPath: /opt/bitnami/postgresql/conf
+              subPath: app-conf-dir
+            - name: empty-dir
+              mountPath: /opt/bitnami/postgresql/tmp
+              subPath: app-tmp-dir
+            - name: empty-dir
+              mountPath: /opt/bitnami/postgresql/logs
+              subPath: app-logs-dir
+            - name: dshm
+              mountPath: /dev/shm
+            - name: data
+              mountPath: /bitnami/postgresql
+      volumes:
+        - name: empty-dir
+          emptyDir: {}
+        - name: dshm
+          emptyDir:
+            medium: Memory
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: data
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: "8Gi"
+---
+# Source: zero-to-hero/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: zero-zero-to-hero
+  labels:
+    helm.sh/chart: zero-to-hero-0.1.0
+    app.kubernetes.io/name: zero-to-hero
+    app.kubernetes.io/instance: zero
+    app.kubernetes.io/version: "0.1.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  rules:
+    - host: "chart-example.local"
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: zero-zero-to-hero
+                port:
+                  number: 80

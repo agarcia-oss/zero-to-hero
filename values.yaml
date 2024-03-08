@@ -35,6 +35,11 @@ podSecurityContext:
   readOnlyRootFilesystem: true
   # fsGroup: 2000
 
+networkPolicy:
+  enabled : true
+smtp:
+  enabled: false
+
 securityContext:
   capabilities:
     drop:
