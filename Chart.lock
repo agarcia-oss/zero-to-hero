@@ -4,12 +4,12 @@ dependencies:
   version: 5.3.1
 - name: nginx
   repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
-  version: 15.12.4
+  version: 15.14.1
 - name: grafana
   repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
-  version: 9.11.1
+  version: 9.13.1
 - name: postgresql
   repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
   version: 14.3.1
-digest: sha256:ee17fe8476fd1f9f5336dc9fe336aad9a7fdd8ed6c76a651e1b312e2355b3c6c
-generated: "2024-03-07T13:04:40.506121+01:00"
+digest: sha256:14a5e750e13099c00a151b0cb3677f9a8696252c3bad246d2ffdc56ec3dda136
+generated: "2024-03-08T12:55:02.985527+01:00"

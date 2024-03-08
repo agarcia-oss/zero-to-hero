@@ -29,12 +29,12 @@ dependencies:
     tags:
       - clickhouse
   - name: nginx
-    version: 15.12.4
+    version: 15.14.1
     repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
     tags:
       - nginx
   - name: grafana
-    version: 9.11.1
+    version: 9.13.1
     repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
     tags:
       - grafana
