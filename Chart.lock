@@ -10,6 +10,6 @@ dependencies:
   version: 9.13.1
 - name: postgresql
   repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
-  version: 14.3.1
-digest: sha256:14a5e750e13099c00a151b0cb3677f9a8696252c3bad246d2ffdc56ec3dda136
-generated: "2024-03-08T12:55:02.985527+01:00"
+  version: 14.3.4
+digest: sha256:c9dd8d6d9d23a57b1b452cd0c85e51b05d1615be08caa7a0581d5aaef4e6bf9a
+generated: "2024-03-11T13:56:44.757702+01:00"
