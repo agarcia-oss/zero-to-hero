@@ -1,29 +1,38 @@
-# Project Name
+# Helm Charts - Zero to Hero
 
 ## Description
 
-This project contains a Helm chart for a Kubernetes application. The chart is of type 'application' and it's currently at version 0.1.0. The application version is also 0.1.0.
+This project is a simple exercise for evaluating Open Source Helm charts security and configuration issues. It can be used along with the [Kubescape Bitnami](https://hub.docker.com/r/bitnami/kubescape) CLI tool to generate an OSS Assessment health report.
 
-The Helm chart has dependencies on the following:
+The Helm chart has the following dependencies:
 
-- Elasticsearch version 8.5.1 from https://helm.elastic.co
-- Nginx-Ingress version 1.1.3 from oci://ghcr.io/nginxinc/charts
-- Grafana
+- **PostgreSQL** version 14.3.1 from [oci://registry-1.docker.io/bitnamicharts](https://github.com/bitnami/charts/tree/main/bitnami/postgresql)
+- **Nginx** version 15.14.0 from [oci://registry-1.docker.io/bitnamicharts](https://github.com/bitnami/charts/tree/main/bitnami/nginx)
+- **Grafana** version 9.13.0 from [oci://registry-1.docker.io/bitnamicharts](https://github.com/bitnami/charts/tree/main/bitnami/grafana)
+- **Clickhouse** version 5.3.0 from [oci://registry-1.docker.io/bitnamicharts](https://github.com/bitnami/charts/tree/main/bitnami/clickhouse)
 
 Each dependency is tagged for easy identification and management.
 
-## Installation
+All these dependencies have an equivalent chart in the [Tanzu Application Catalog](https://app-catalog.vmware.com/catalog).
 
-Provide instructions on how to install and run your project.
+Alternative versions of the Helm chart can be found here:
 
-## Usage
+* [Upstream charts dependencies](https://github.com/agarcia-oss/zero-to-hero/tree)
+* [Tanzu Application Catalog chart dependencies](https://github.com/agarcia-oss/zero-to-hero/tree/tac)
 
-Provide instructions on how to use your project.
+## Executing the report
 
-## Contributing
+```bash
+docker run --rm -it -v $HOME:/output \
+        bitnami/kubescape:3.0.3 oss-assessment \
+        https://github.com/agarcia-oss/zero-to-hero/tree/bitnami \
+        --output /output/report.json
+```
 
-Provide instructions on how to contribute to your project.
+## Sample report for this repository
 
-## License
+![alt text](image.png)
 
-Include information about the license.
+## Obtaining the OSS Healh Assessmet
+
+TBC
