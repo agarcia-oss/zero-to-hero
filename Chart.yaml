@@ -39,7 +39,7 @@ dependencies:
     tags:
       - grafana
   - name: postgresql
-    version: 14.3.1
+    version: 14.3.3
     repository: oci://registry-1.docker.io/bitnamicharts
     tags:
       - postgresql

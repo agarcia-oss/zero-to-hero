@@ -6,7 +6,7 @@ This project is a simple exercise for evaluating Open Source Helm charts securit
 
 The Helm chart has the following dependencies:
 
-- **PostgreSQL** version 14.3.1 from [oci://registry-1.docker.io/bitnamicharts](https://github.com/bitnami/charts/tree/main/bitnami/postgresql)
+- **PostgreSQL** version 14.3.3 from [oci://registry-1.docker.io/bitnamicharts](https://github.com/bitnami/charts/tree/main/bitnami/postgresql)
 - **Nginx** version 15.14.0 from [oci://registry-1.docker.io/bitnamicharts](https://github.com/bitnami/charts/tree/main/bitnami/nginx)
 - **Grafana** version 9.13.0 from [oci://registry-1.docker.io/bitnamicharts](https://github.com/bitnami/charts/tree/main/bitnami/grafana)
 - **Clickhouse** version 5.3.0 from [oci://registry-1.docker.io/bitnamicharts](https://github.com/bitnami/charts/tree/main/bitnami/clickhouse)
