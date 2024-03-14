@@ -39,7 +39,7 @@ dependencies:
     tags:
       - grafana
   - name: postgresql
-    version: 14.3.4
+    version: 14.3.8
     repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
     tags:
       - postgresql

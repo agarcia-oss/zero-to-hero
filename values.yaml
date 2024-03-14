@@ -131,7 +131,8 @@ postgresql:
       runAsNonRoot: true
       runAsGroup: 1000
       unAsUser: 1000
-      seccompProfile: "true"
+      seccompProfile:
+        type: "true"
       seLinuxOptions: "true"
       allowPrivilegeEscalation: false
 
@@ -149,7 +150,8 @@ grafana:
       runAsNonRoot: true
       runAsGroup: 1000
       unAsUser: 1000
-      seccompProfile: "true"
+      seccompProfile:
+        type: "true"
       seLinuxOptions: "true"
       allowPrivilegeEscalation: false
 
@@ -164,7 +166,8 @@ nginx:
     runAsNonRoot: true
     runAsGroup: 1000
     unAsUser: 1000
-    seccompProfile: "true"
+    seccompProfile:
+      type: "true"
     seLinuxOptions: "true"
     allowPrivilegeEscalation: false
 
@@ -181,7 +184,8 @@ clickhouse:
       runAsNonRoot: true
       runAsGroup: 1000
       unAsUser: 1000
-      seccompProfile: "true"
+      seccompProfile:
+        type: "true"
       seLinuxOptions: "true"
       allowPrivilegeEscalation: false
   containerSecurityContext:
@@ -193,6 +197,7 @@ clickhouse:
     runAsNonRoot: true
     runAsGroup: 1000
     unAsUser: 1000
-    seccompProfile: "true"
+    seccompProfile:
+      type: "true"
     seLinuxOptions: "true"
     allowPrivilegeEscalation: false
