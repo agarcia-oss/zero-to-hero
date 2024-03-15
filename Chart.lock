@@ -1,15 +1,15 @@
 dependencies:
 - name: clickhouse
-  repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
+  repository: oci://tac-vmware-it-docker-local.artifactory.eng.vmware.com/charts/photon-4
   version: 5.3.1
 - name: nginx
-  repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
+  repository: oci://tac-vmware-it-docker-local.artifactory.eng.vmware.com/charts/photon-4
   version: 15.14.1
 - name: grafana
-  repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
+  repository: oci://tac-vmware-it-docker-local.artifactory.eng.vmware.com/charts/photon-4
   version: 9.13.1
 - name: postgresql
-  repository: oci://harbor-repo.vmware.com/vac_vmware_it/charts/photon-4
+  repository: oci://tac-vmware-it-docker-local.artifactory.eng.vmware.com/charts/photon-4
   version: 14.3.8
-digest: sha256:3866f4bddb63b847b1d5011771c87a8a983dc49c74f5629df173547fa775c8d3
-generated: "2024-03-14T11:23:43.576083+01:00"
+digest: sha256:90960f91983708d6e40165ac82d78eb110a1469dfd5866ad13d612b94a629e7d
+generated: "2024-03-15T08:05:23.319094+01:00"
