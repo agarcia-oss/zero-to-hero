@@ -124,41 +124,41 @@ tolerations: []
 
 affinity: {}
 
-postgresql:
-  enabled: true
-  primary:
-    containerSecurityContext:
-      enabled: true
-      capabilities:
-        drop:
-        - ALL
-      readOnlyRootFilesystem: true
-      runAsNonRoot: true
-      runAsGroup: 1000
-      unAsUser: 1000
-      seccompProfile:
-        type: "RuntimeDefault"
-      seLinuxOptions: "true"
-      allowPrivilegeEscalation: false
+# postgresql:
+#   enabled: true
+#   primary:
+#     containerSecurityContext:
+#       enabled: true
+#       capabilities:
+#         drop:
+#         - ALL
+#       readOnlyRootFilesystem: true
+#       runAsNonRoot: true
+#       runAsGroup: 1000
+#       unAsUser: 1000
+#       seccompProfile:
+#         type: "RuntimeDefault"
+#       seLinuxOptions: "true"
+#       allowPrivilegeEscalation: false
 
-grafana:
-  grafana:
-    enabled: true
-    ingress:
-      enabled: true
-    containerSecurityContext:
-      enabled: true
-      capabilities:
-        drop:
-        - ALL
-      readOnlyRootFilesystem: true
-      runAsNonRoot: true
-      runAsGroup: 1000
-      unAsUser: 1000
-      seccompProfile:
-        type: "RuntimeDefault"
-      seLinuxOptions: "true"
-      allowPrivilegeEscalation: false
+# grafana:
+#   grafana:
+#     enabled: true
+#     ingress:
+#       enabled: true
+#     containerSecurityContext:
+#       enabled: true
+#       capabilities:
+#         drop:
+#         - ALL
+#       readOnlyRootFilesystem: true
+#       runAsNonRoot: true
+#       runAsGroup: 1000
+#       unAsUser: 1000
+#       seccompProfile:
+#         type: "RuntimeDefault"
+#       seLinuxOptions: "true"
+#       allowPrivilegeEscalation: false
 
 nginx:
   enabled: true
@@ -206,4 +206,3 @@ clickhouse:
       type: "RuntimeDefault"
     seLinuxOptions: "true"
     allowPrivilegeEscalation: false
-
