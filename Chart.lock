@@ -7,9 +7,9 @@ dependencies:
   version: 15.14.1
 - name: grafana
   repository: oci://tac-vmware-it-docker-local.artifactory.eng.vmware.com/charts/photon-4
-  version: 10.0.1
+  version: 10.0.3
 - name: postgresql
   repository: oci://tac-vmware-it-docker-local.artifactory.eng.vmware.com/charts/photon-4
-  version: 15.0.1
-digest: sha256:dbfc9eaeec56f2231c884446a0ba24cc8ea2739aa9502bc60343ab2a6953a180
-generated: "2024-03-19T11:12:44.470751+01:00"
+  version: 15.1.1
+digest: sha256:14682c088aea0b2d5736a0d2ec92ba5318a745feb87d36d8b9f4e0c30a6731a1
+generated: "2024-03-21T13:25:13.201826+01:00"

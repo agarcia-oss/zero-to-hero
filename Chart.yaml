@@ -34,12 +34,12 @@ dependencies:
     tags:
       - nginx
   - name: grafana
-    version: 10.0.1
+    version: 10.0.3
     repository: oci://tac-vmware-it-docker-local.artifactory.eng.vmware.com/charts/photon-4
     tags:
       - grafana
   - name: postgresql
-    version: 15.0.1
+    version: 15.1.1
     repository: oci://tac-vmware-it-docker-local.artifactory.eng.vmware.com/charts/photon-4
     tags:
       - postgresql

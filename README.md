@@ -6,9 +6,9 @@ This project is a simple exercise for evaluating Open Source Helm charts securit
 
 The Helm chart has the following dependencies:
 
-- **PostgreSQL** version 15.0.1 from [Tanzu Application Catalog](https://app-catalog.vmware.com/catalog/c055cf51-9de0-4a48-b973-c8fd73c05215/branch/7555ef9a-5067-45e4-9649-75f556788c10)
+- **PostgreSQL** version 15.1.1 from [Tanzu Application Catalog](https://app-catalog.vmware.com/catalog/c055cf51-9de0-4a48-b973-c8fd73c05215/branch/7555ef9a-5067-45e4-9649-75f556788c10)
 - **Nginx** version 15.14.1 from [Tanzu Application Catalog](https://app-catalog.vmware.com/catalog/4fa334b0-8ee6-4e4f-8284-c9f759fd04ab/branch/4eb63c5b-acee-41f3-9744-60b19320e822)
-- **Grafana** version 10.0.1 from [Tanzu Application Catalog](https://app-catalog.vmware.com/catalog/c5f532f6-15b9-4506-90e3-d4a4da4b1f15/branch/9c60f964-d913-4050-8c7e-26eb67384666)
+- **Grafana** version 10.0.3 from [Tanzu Application Catalog](https://app-catalog.vmware.com/catalog/c5f532f6-15b9-4506-90e3-d4a4da4b1f15/branch/9c60f964-d913-4050-8c7e-26eb67384666)
 - **Clickhouse** version 5.3.2 from [Tanzu Application Catalog](https://app-catalog.vmware.com/catalog/711fe8cb-03f4-49f3-91ab-d5d3da9829d8/branch/55c0f7a5-4899-43f5-89d1-e074cea2062c)
 
 Each dependency is tagged for easy identification and management.
