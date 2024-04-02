@@ -24,22 +24,22 @@ version: 0.1.0
 appVersion: "0.1.0"
 dependencies:
   - name: clickhouse
-    version: 5.3.2
+    version: 5.3.9
     repository: oci://tac-vmware-it-docker-local.artifactory.eng.vmware.com/charts/photon-4
     tags:
       - clickhouse
   - name: nginx
-    version: 15.14.1
+    version: 15.14.6
     repository: oci://tac-vmware-it-docker-local.artifactory.eng.vmware.com/charts/photon-4
     tags:
       - nginx
   - name: grafana
-    version: 10.0.3
+    version: 10.0.7
     repository: oci://tac-vmware-it-docker-local.artifactory.eng.vmware.com/charts/photon-4
     tags:
       - grafana
   - name: postgresql
-    version: 15.1.1
+    version: 15.2.1
     repository: oci://tac-vmware-it-docker-local.artifactory.eng.vmware.com/charts/photon-4
     tags:
       - postgresql
