@@ -160,49 +160,49 @@ affinity: {}
 #       seLinuxOptions: "true"
 #       allowPrivilegeEscalation: false
 
-nginx:
-  enabled: true
-  containerSecurityContext:
-    enabled: true
-    capabilities:
-      drop:
-      - ALL
-    readOnlyRootFilesystem: true
-    runAsNonRoot: true
-    runAsGroup: 1000
-    unAsUser: 1000
-    seccompProfile:
-      type: "RuntimeDefault"
-    seLinuxOptions: "true"
-    allowPrivilegeEscalation: false
+# nginx:
+#   enabled: true
+#   containerSecurityContext:
+#     enabled: true
+#     capabilities:
+#       drop:
+#       - ALL
+#     readOnlyRootFilesystem: true
+#     runAsNonRoot: true
+#     runAsGroup: 1000
+#     unAsUser: 1000
+#     seccompProfile:
+#       type: "RuntimeDefault"
+#     seLinuxOptions: "true"
+#     allowPrivilegeEscalation: false
 
-clickhouse:
-  enabled: true
-  zookeeper:
-    enabled: true
-    containerSecurityContext:
-      enabled: true
-      capabilities:
-        drop:
-        - ALL
-      readOnlyRootFilesystem: true
-      runAsNonRoot: true
-      runAsGroup: 1000
-      unAsUser: 1000
-      seccompProfile:
-        type: "RuntimeDefault"
-      seLinuxOptions: "true"
-      allowPrivilegeEscalation: false
-  containerSecurityContext:
-    enabled: true
-    capabilities:
-      drop:
-      - ALL
-    readOnlyRootFilesystem: true
-    runAsNonRoot: true
-    runAsGroup: 1000
-    unAsUser: 1000
-    seccompProfile:
-      type: "RuntimeDefault"
-    seLinuxOptions: "true"
-    allowPrivilegeEscalation: false
+# clickhouse:
+#   enabled: true
+#   zookeeper:
+#     enabled: true
+#     containerSecurityContext:
+#       enabled: true
+#       capabilities:
+#         drop:
+#         - ALL
+#       readOnlyRootFilesystem: true
+#       runAsNonRoot: true
+#       runAsGroup: 1000
+#       unAsUser: 1000
+#       seccompProfile:
+#         type: "RuntimeDefault"
+#       seLinuxOptions: "true"
+#       allowPrivilegeEscalation: false
+#   containerSecurityContext:
+#     enabled: true
+#     capabilities:
+#       drop:
+#       - ALL
+#     readOnlyRootFilesystem: true
+#     runAsNonRoot: true
+#     runAsGroup: 1000
+#     unAsUser: 1000
+#     seccompProfile:
+#       type: "RuntimeDefault"
+#     seLinuxOptions: "true"
+#     allowPrivilegeEscalation: false
