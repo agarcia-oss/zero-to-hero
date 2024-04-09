@@ -13,7 +13,7 @@ The Helm chart has the following dependencies:
 
 Each dependency is tagged for easy identification and management.
 
-All these dependencies have an equivalent chart in the [Bitnami Catalog](https://github.com/bitnami/charts) as well as in  [Tanzu Application Catalog](https://app-catalog.vmware.com/catalog).
+All these dependencies have an equivalent chart in the [Bitnami Catalog](https://github.com/bitnami/charts) as well as in [Tanzu Application Catalog](https://app-catalog.vmware.com/catalog).
 
 Alternative versions of the Helm chart can be found here:
 
@@ -23,7 +23,7 @@ Alternative versions of the Helm chart can be found here:
 ## Executing the report
 
 ```bash
-docker run --rm -it -v $HOME:/output \
+docker run --rm -it -v /tmp:/output \
         bitnami/kubescape:3.0.3 oss-assessment \
         https://github.com/agarcia-oss/zero-to-hero \
         --output /output/report.json
@@ -35,4 +35,4 @@ docker run --rm -it -v $HOME:/output \
 
 ## Obtaining the OSS Healh Assessmet
 
-TBC
+The Tanzu OSS Health Assessment can be found at the following URL: [Tanzu OSS Health Assessment](https://tanzu.vmware.com/oss-health-assessment)
