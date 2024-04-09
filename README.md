@@ -23,7 +23,7 @@ Alternative versions of the Helm chart can be found here:
 ## Executing the report
 
 ```bash
-docker run --rm -it -v $HOME:/output \
+docker run --rm -it -v /tmp:/output \
         bitnami/kubescape:3.0.3 oss-assessment \
         https://github.com/agarcia-oss/zero-to-hero/tree/bitnami \
         --output /output/report.json
@@ -35,4 +35,4 @@ docker run --rm -it -v $HOME:/output \
 
 ## Obtaining the OSS Healh Assessmet
 
-The Tanzu OSS Health Assessment can be found at the following URL: [Tanzu OSS Health Assessment](https://tanzu.vmware.com/oss-health-assessment)
+Tanzu OSS Health Assessment can be found at the following URL: [Tanzu OSS Health Assessment](https://tanzu.vmware.com/oss-health-assessment). You'll need to upload the report generated from the repository (`/tmp/report.json`) there to obtain the full assessment.
