@@ -7,9 +7,9 @@ This project is a simple exercise for evaluating Open Source Helm charts securit
 The Helm chart has the following dependencies:
 
 - **PostgreSQL** version 15.2.4 from [oci://registry-1.docker.io/bitnamicharts](https://github.com/bitnami/charts/tree/main/bitnami/postgresql)
-- **Nginx** version 16.0.1 from [oci://registry-1.docker.io/bitnamicharts](https://github.com/bitnami/charts/tree/main/bitnami/nginx)
+- **Nginx** version 16.0.2 from [oci://registry-1.docker.io/bitnamicharts](https://github.com/bitnami/charts/tree/main/bitnami/nginx)
 - **Grafana** version 10.0.6 from [oci://registry-1.docker.io/bitnamicharts](https://github.com/bitnami/charts/tree/main/bitnami/grafana)
-- **Clickhouse** version 6.0.1 from [oci://registry-1.docker.io/bitnamicharts](https://github.com/bitnami/charts/tree/main/bitnami/clickhouse)
+- **Clickhouse** version 6.0.2 from [oci://registry-1.docker.io/bitnamicharts](https://github.com/bitnami/charts/tree/main/bitnami/clickhouse)
 
 Each dependency is tagged for easy identification and management.
 
@@ -35,4 +35,4 @@ docker run --rm -it -v $HOME:/output \
 
 ## Obtaining the OSS Healh Assessmet
 
-TBC
+The Tanzu OSS Health Assessment can be found at the following URL: [Tanzu OSS Health Assessment](https://tanzu.vmware.com/oss-health-assessment)

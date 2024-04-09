@@ -24,12 +24,12 @@ version: 0.1.0
 appVersion: "0.1.0"
 dependencies:
   - name: clickhouse
-    version: 6.0.1
+    version: 6.0.2
     repository: oci://registry-1.docker.io/bitnamicharts
     tags:
       - clickhouse
   - name: nginx
-    version: 16.0.1
+    version: 16.0.2
     repository: oci://registry-1.docker.io/bitnamicharts
     tags:
       - nginx
