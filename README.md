@@ -33,6 +33,6 @@ docker run --rm -it -v /tmp:/output \
 
 ![alt text](image.png)
 
-## Obtaining the OSS Healh Assessmet
+## Obtaining the OSS Health Assessment
 
 Tanzu OSS Health Assessment can be found at the following URL: [Tanzu OSS Health Assessment](https://tanzu.vmware.com/oss-health-assessment). You'll need to upload the report generated from the repository (`/tmp/report.json`) there to obtain the full assessment.
