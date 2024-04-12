@@ -124,22 +124,27 @@ tolerations: []
 
 affinity: {}
 
-# postgresql:
-#   enabled: true
-#   primary:
-#     containerSecurityContext:
-#       enabled: true
-#       capabilities:
-#         drop:
-#         - ALL
-#       readOnlyRootFilesystem: true
-#       runAsNonRoot: true
-#       runAsGroup: 1000
-#       unAsUser: 1000
-#       seccompProfile:
-#         type: "RuntimeDefault"
-#       seLinuxOptions: "true"
-#       allowPrivilegeEscalation: false
+postgresql:
+  enabled: true
+  # auth:
+  #     usePasswordFiles: "true"
+  #     existingSecret: "postgresql"
+  # primary:
+  #   auth:
+  #     usePasswordFiles: "true"
+  #   containerSecurityContext:
+  #     enabled: true
+  #     capabilities:
+  #       drop:
+  #       - ALL
+  #     readOnlyRootFilesystem: true
+  #     runAsNonRoot: true
+  #     runAsGroup: 1000
+  #     unAsUser: 1000
+  #     seccompProfile:
+  #       type: "RuntimeDefault"
+  #     seLinuxOptions: "true"
+  #     allowPrivilegeEscalation: false
 
 # grafana:
 #   grafana:

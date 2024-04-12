@@ -4,12 +4,12 @@ dependencies:
   version: 6.0.2
 - name: nginx
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 16.0.2
+  version: 16.0.3
 - name: grafana
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 10.0.6
+  version: 10.0.7
 - name: postgresql
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 15.2.4
-digest: sha256:30feccd2497f86cbdcf25a94e5815366b23a754f348663dfe18c5c45b79c60e2
-generated: "2024-04-09T18:08:18.671529+02:00"
+  version: 15.2.5
+digest: sha256:a685b2203b8dd83b618667c0dc6e53142c3e6e2483aad4a56cdf894f75c194ee
+generated: "2024-04-12T15:01:36.474666+02:00"
