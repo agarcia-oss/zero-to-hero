@@ -24,22 +24,22 @@ version: 0.1.0
 appVersion: "0.1.0"
 dependencies:
   - name: clickhouse
-    version: 8.0.7
+    version: 8.0.9
     repository: oci://tac-tanzu-platform-software-catalog-oci-prod-local.usw1.packages.broadcom.com/charts/photon-5
     tags:
       - clickhouse
   - name: nginx
-    version: 19.0.8
+    version: 19.0.9
     repository: oci://tac-tanzu-platform-software-catalog-oci-prod-local.usw1.packages.broadcom.com/charts/photon-5
     tags:
       - nginx
   - name: grafana
-    version: 11.4.17
+    version: 11.6.5
     repository: oci://tac-tanzu-platform-software-catalog-oci-prod-local.usw1.packages.broadcom.com/charts/photon-5
     tags:
       - grafana
   - name: postgresql
-    version: 16.5.1
+    version: 16.6.2
     repository: oci://tac-tanzu-platform-software-catalog-oci-prod-local.usw1.packages.broadcom.com/charts/photon-5
     tags:
       - postgresql
