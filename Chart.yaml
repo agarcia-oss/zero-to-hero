@@ -24,12 +24,12 @@ version: 0.1.0
 appVersion: "0.1.0"
 dependencies:
   - name: clickhouse
-    version: 8.0.8
+    version: 9.0.0
     repository: oci://registry-1.docker.io/bitnamicharts
     tags:
       - clickhouse
   - name: nginx
-    version: 19.0.4
+    version: 19.1.0
     repository: oci://registry-1.docker.io/bitnamicharts
     tags:
       - nginx
@@ -39,7 +39,7 @@ dependencies:
     tags:
       - grafana
   - name: postgresql
-    version: 16.6.0
+    version: 16.6.3
     repository: oci://registry-1.docker.io/bitnamicharts
     tags:
       - postgresql

@@ -1,15 +1,15 @@
 dependencies:
 - name: clickhouse
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 8.0.8
+  version: 9.0.0
 - name: nginx
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 19.0.4
+  version: 19.1.0
 - name: grafana
   repository: oci://registry-1.docker.io/bitnamicharts
   version: 11.6.3
 - name: postgresql
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 16.6.0
-digest: sha256:65d5315f2a3d44565888d37e59b8648233524b9e90ac58ac9d64cc1f0ed41dba
-generated: "2025-04-02T18:03:29.975066+02:00"
+  version: 16.6.3
+digest: sha256:38308aa78771a248e271e2d1c5e104fb13c4c1012a6c008f3ca1e948f1c7d11b
+generated: "2025-04-15T12:34:50.517902+02:00"
