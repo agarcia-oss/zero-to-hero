@@ -1,15 +1,15 @@
 dependencies:
 - name: clickhouse
   repository: oci://tac-tanzu-platform-software-catalog-oci-prod-local.usw1.packages.broadcom.com/charts/photon-5
-  version: 8.0.9
+  version: 9.2.1
 - name: nginx
   repository: oci://tac-tanzu-platform-software-catalog-oci-prod-local.usw1.packages.broadcom.com/charts/photon-5
-  version: 19.0.9
+  version: 20.0.1
 - name: grafana
   repository: oci://tac-tanzu-platform-software-catalog-oci-prod-local.usw1.packages.broadcom.com/charts/photon-5
-  version: 11.6.5
+  version: 11.6.9
 - name: postgresql
   repository: oci://tac-tanzu-platform-software-catalog-oci-prod-local.usw1.packages.broadcom.com/charts/photon-5
-  version: 16.6.2
-digest: sha256:82427d895d5f125e261baaf0019974cd8aeda600239623eb0f3bedba6c2ae651
-generated: "2025-04-02T15:17:36.677927+02:00"
+  version: 16.6.9
+digest: sha256:cbff95248b6289bc8f0ffe2973bc273ea73c89ffdfe6887ce74f03af4d66085b
+generated: "2025-04-24T19:32:45.482312+02:00"

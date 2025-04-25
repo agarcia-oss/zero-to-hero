@@ -24,7 +24,7 @@ Alternative versions of the Helm chart can be found here:
 
 ```bash
 docker run --rm -it -v /tmp:/output \
-        bitnami/kubescape:3.0.3 oss-assessment \
+        bitnami/kubescape oss-assessment \
         https://github.com/agarcia-oss/zero-to-hero/tree/tac \
         --output /output/report.json
 ```
